@@ -1,6 +1,5 @@
 package com.pg.generate.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pg.generate.dao.TablesSchemaMapper;
 import com.pg.generate.entity.TablesSchema;
 import com.pg.generate.service.TablesSchemaService;
@@ -10,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class TablesSchemaServiceImpl extends ServiceImpl<TablesSchemaMapper, TablesSchema> implements TablesSchemaService {
+public class TablesSchemaServiceImpl implements TablesSchemaService {
 
     @Resource
     private TablesSchemaMapper tablesSchemaMapper;

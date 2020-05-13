@@ -3,10 +3,8 @@ package com.pg.generate.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class TablesSchema implements Serializable {
+public class TablesSchema {
 
     private static final long serialVersionUID = 1L;
 

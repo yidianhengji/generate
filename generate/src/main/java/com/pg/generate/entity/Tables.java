@@ -3,12 +3,8 @@ package com.pg.generate.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class Tables implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Tables {
 
     @ApiModelProperty(value = "数据库名称")
     private String tableSchema;
