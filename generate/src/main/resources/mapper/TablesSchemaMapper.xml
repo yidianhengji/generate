@@ -8,7 +8,8 @@
             data_type,
             character_maximum_length,
             collation_name,
-            column_comment
+            column_comment,
+            column_key
         FROM
             information_schema. COLUMNS
         WHERE

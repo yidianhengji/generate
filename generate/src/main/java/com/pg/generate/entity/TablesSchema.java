@@ -22,4 +22,7 @@ public class TablesSchema {
 
     @ApiModelProperty(value = "字段描述")
     private String columnComment;
+
+    @ApiModelProperty(value = "表列键")
+    private String columnKey;
 }

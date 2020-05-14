@@ -13,4 +13,5 @@ public interface TablesSchemaService {
      * @param tableName
      */
     List<TablesSchema> queryTableColumnAll(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
+
 }

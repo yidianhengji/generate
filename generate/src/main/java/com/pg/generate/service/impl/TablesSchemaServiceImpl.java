@@ -14,8 +14,14 @@ public class TablesSchemaServiceImpl implements TablesSchemaService {
     @Resource
     private TablesSchemaMapper tablesSchemaMapper;
 
+    /**
+     * 查询表下面所有的字段
+     * @param tableSchema
+     * @param tableName
+     */
     @Override
     public List<TablesSchema> queryTableColumnAll(String tableSchema, String tableName) {
         return tablesSchemaMapper.queryTableColumnAll(tableSchema, tableName);
     }
+
 }
