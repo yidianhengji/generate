@@ -1,4 +1,4 @@
-package com.pg.bocken.config;
+package com.pg.book.config;
 
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import com.google.common.collect.Lists;
@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 //控制暴露出去的路径下的实例
                 //如果某个接口不想暴露,可以使用以下注解
                 //@ApiIgnore 这样,该接口就不会暴露在 swagger2 的页面下
-                .apis(RequestHandlerSelectors.basePackage("com.pg.bocken")).paths(PathSelectors.any()).build().securityContexts(Lists.newArrayList(securityContext())).securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
+                .apis(RequestHandlerSelectors.basePackage("com.pg.book")).paths(PathSelectors.any()).build().securityContexts(Lists.newArrayList(securityContext())).securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
     }
 
     private ApiKey apiKey() {

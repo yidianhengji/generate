@@ -1,4 +1,4 @@
-package com.pg.bocken.config;
+package com.pg.book.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.mybatis.spring.annotation.MapperScan;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import java.beans.PropertyVetoException;
 
 @Configuration
-@MapperScan("com.pg.bocken.dao")
+@MapperScan("com.pg.book.dao")
 public class DataSourceConfig {
     @Value("${jdbc.username}")
     private String jdbcUser;

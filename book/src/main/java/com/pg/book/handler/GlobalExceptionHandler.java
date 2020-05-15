@@ -1,4 +1,4 @@
-package com.pg.bocken.handler;
+package com.pg.book.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartException;
 
 import javax.validation.UnexpectedTypeException;
 
-@ControllerAdvice(basePackages = "com.pg.bocken.controller")
+@ControllerAdvice(basePackages = "com.pg.book.controller")
 public class GlobalExceptionHandler {
     private static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 

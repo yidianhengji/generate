@@ -1,4 +1,4 @@
-package com.pg.bocken.config;
+package com.pg.book.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;

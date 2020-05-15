@@ -1,11 +1,11 @@
-package com.pg.bocken.handler;
+package com.pg.book.handler;
 
 public class ResultPage<T> {
     private Integer code;
     private String msg;
-    private com.pg.bocken.handler.PageInfo<T> data;
+    private com.pg.book.handler.PageInfo<T> data;
 
-    public ResultPage(BusinessStatus businessStatus, com.pg.bocken.handler.PageInfo<T> pageInfo) {
+    public ResultPage(BusinessStatus businessStatus, com.pg.book.handler.PageInfo<T> pageInfo) {
         this.code = businessStatus.getCode();
         this.msg = businessStatus.getMsg();
         this.data = pageInfo;
