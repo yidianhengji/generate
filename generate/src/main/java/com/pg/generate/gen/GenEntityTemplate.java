@@ -9,7 +9,7 @@ public class GenEntityTemplate {
      * @return String
      */
     public static String genEntityTemplate(String myPackage, String myTableName, String myContent) {
-        return "package " + myPackage + ";\n" +
+        return "package " + myPackage + ".entity;\n" +
                 "\n" +
                 "import io.swagger.annotations.ApiModelProperty;\n" +
                 "import lombok.Data;\n" +

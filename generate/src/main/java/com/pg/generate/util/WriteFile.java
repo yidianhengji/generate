@@ -24,4 +24,22 @@ public class WriteFile {
         }
     }
 
+    public static void writeFileXml(String filePath, String entityName, String content) {
+        String newFilePath = filePath + "\\" + entityName + ".xml";
+        FileWriter fileWriter = null;
+        try {
+            File file = new File(newFilePath);
+            if (!file.exists()) {
+                fileWriter = new FileWriter(newFilePath);//创建文本文件
+                fileWriter.write(content);
+                fileWriter.flush();
+                fileWriter.close();
+            } else {
+                System.out.println("文件存在");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

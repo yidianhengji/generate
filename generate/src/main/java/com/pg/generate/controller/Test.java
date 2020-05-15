@@ -1,7 +1,7 @@
 package com.pg.generate.controller;
 
 import com.pg.generate.dto.GenTableInfo;
-import com.pg.generate.service.GenService;
+import com.pg.generate.service.GensService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,13 +13,13 @@ import javax.annotation.Resource;
 public class Test {
 
     @Resource
-    private GenService genService;
+    private GensService genService;
 
     @PostMapping
     public int ee() {
         GenTableInfo genTableInfo = new GenTableInfo();
         genTableInfo.setTableSchema("bbs_sifou");
-        genTableInfo.setTableName("tb_recommend");
+        genTableInfo.setTableName("tb_users_info");
         genService.GenEntity(genTableInfo);
         return 0;
     }

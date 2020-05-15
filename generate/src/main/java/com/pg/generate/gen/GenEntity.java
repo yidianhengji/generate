@@ -39,6 +39,8 @@ public class GenEntity {
                 content.append("    private String " + columnName + ";\n\n");
             }
         }
+        content.append("    private Integer pageSize;\n\n");
+        content.append("    private Integer pageNum;\n\n");
         String s_content = content.toString();
         String genEntityTemplate = GenEntityTemplate.genEntityTemplate(myPackage, tableName, s_content);
         return genEntityTemplate;

@@ -3,10 +3,8 @@ package com.pg.generate.service.impl;
 import com.pg.generate.dao.TablesSchemaMapper;
 import com.pg.generate.dto.GenTableInfo;
 import com.pg.generate.entity.TablesSchema;
-import com.pg.generate.gen.GenDaoTemplate;
-import com.pg.generate.gen.GenEntity;
-import com.pg.generate.gen.GenMapper;
-import com.pg.generate.service.GenService;
+import com.pg.generate.gen.*;
+import com.pg.generate.service.GensService;
 import com.pg.generate.util.Common;
 import com.pg.generate.util.WriteFile;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class GenServiceImpl implements GenService {
+public class GensServiceImpl implements GensService {
 
     @Resource
     private TablesSchemaMapper tablesSchemaMapper;
@@ -26,8 +24,11 @@ public class GenServiceImpl implements GenService {
     private static final String JavaPath = "src\\main\\java";
     // 项目包名
     private static final String JavaPackagePath = "com\\pg\\generate";
-
+    // 项目包
     private static final String myPackage = "com.pg.generate";
+    // mapper地址
+    private static final String mapperPath = "src\\main\\resources\\mapper";
+
 
     /**
      * 生成实体信息
@@ -44,23 +45,38 @@ public class GenServiceImpl implements GenService {
         String defaultTableName = Common.underlineToCamel(genTableInfo.getTableName());
         // 表名称
         String myTableName = genTableInfo.getTableName();
-
+        // 表注释
+        String tableComment = genTableInfo.getTableComment();
 
 
         // 实例的模板数据
-        //String genEntityTemplate = GenEntity.genEntity(myPackage + ".entity", tableName, tableColumnAll);
-        //WriteFile.writeFile(getPath() + "\\entity", tableName, genEntityTemplate);
+        String genEntityTemplate = GenEntity.genEntity(myPackage, tableName, tableColumnAll);
+        WriteFile.writeFile(getPath() + "\\entity", tableName, genEntityTemplate);
         // Dao的模板数据
-        //String genDaoTemplate = GenDaoTemplate.genDaoTemplate(myPackage + ".dao", tableName, defaultTableName);
-        //WriteFile.writeFile(getPath() + "\\dao", tableName + "Mapper", genDaoTemplate);
-
+        String genDaoTemplate = GenDaoTemplate.genDaoTemplate(myPackage, tableName, defaultTableName);
+        WriteFile.writeFile(getPath() + "\\dao", tableName + "Mapper", genDaoTemplate);
+        // Mapper的模板数据
         String genMapper = GenMapper.genMapper(myPackage + ".dao." + tableName + "Mapper", myPackage + ".entity." + tableName, tableName, myTableName, tableColumnAll);
-        System.out.println(genMapper);
+        WriteFile.writeFileXml(getMapperPath(), tableName + "Mapper", genMapper);
+        // Service的模本数据
+        String genServiceTemplate = GenServiceTemplate.genServiceTemplate(myPackage + ".service", tableName, defaultTableName);
+        WriteFile.writeFile(getPath() + "\\service", tableName + "Service", genServiceTemplate);
+        // ServiceImpl的模板数据
+        String genServiceImpl = GenServiceImpl.genServiceImpl(myPackage, tableName, defaultTableName);
+        WriteFile.writeFile(getPath() + "\\service\\impl", tableName + "ServiceImpl", genServiceImpl);
+        // Controller的模板数据
+        String genController = GenController.genController(myPackage, tableName, defaultTableName, tableComment);
+        System.out.println(genController);
+        WriteFile.writeFile(getPath() + "\\controller", tableName + "Controller", genController);
         return 0;
     }
 
     public static String getPath() {
         return ProjectPath + "\\" + JavaPath + "\\" + JavaPackagePath;
+    }
+
+    public static String getMapperPath() {
+        return ProjectPath + "\\" + mapperPath;
     }
 
 }

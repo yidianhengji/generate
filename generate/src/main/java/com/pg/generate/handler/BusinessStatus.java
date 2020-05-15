@@ -52,6 +52,10 @@ public enum BusinessStatus {
 
     //展示
     SUCCESS(200, "成功"),
+    SUCCESS_GET(200, "查询成功"),
+    SUCCESS_ADD(200, "新增成功"),
+    SUCCESS_UPDATE(200, "修改成功"),
+    SUCCESS_DELETE(200, "删除成功"),
 
 
     /**

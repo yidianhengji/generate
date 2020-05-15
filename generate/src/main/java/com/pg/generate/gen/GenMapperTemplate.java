@@ -8,7 +8,9 @@ public class GenMapperTemplate {
             String myMapperName,
             String myTableName,
             String myColumnKey,
-            String myResultContent
+            String myResultContent,
+            String myInsertContent,
+            String myUpdateContent
     ) {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\n" +
@@ -27,8 +29,20 @@ public class GenMapperTemplate {
                 "   </select>\n" +
                 "\n" +
                 "   <select id=\"queryOne\" resultMap=\"" + myMapperName + "Map\">\n" +
-                "       SELECT * FROM " + myTableName + " WHERE "+myColumnKey+" = ${uuid}\n" +
+                "       SELECT * FROM " + myTableName + " WHERE " + myColumnKey + " = #{uuid}\n" +
                 "   </select>\n" +
+                "\n" +
+                "   <insert id=\"insert\">\n" +
+                myInsertContent + "\n" +
+                "   </insert>\n" +
+                "\n" +
+                "   <update id=\"update\">\n" +
+                myUpdateContent + "\n" +
+                "   </update>\n" +
+                "\n" +
+                "   <delete id=\"delete\">\n" +
+                "       DELETE FROM " + myTableName + " WHERE " + myColumnKey + " = #{uuid}\n" +
+                "   </delete>\n" +
                 "\n" +
                 "</mapper>";
     }
