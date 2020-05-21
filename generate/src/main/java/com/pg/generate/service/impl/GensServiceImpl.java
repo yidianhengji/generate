@@ -3,13 +3,19 @@ package com.pg.generate.service.impl;
 import com.pg.generate.dao.TablesSchemaMapper;
 import com.pg.generate.dto.GenTableInfo;
 import com.pg.generate.entity.TablesSchema;
-import com.pg.generate.gen.*;
+import com.pg.generate.gen.VelocityInitializer;
 import com.pg.generate.service.GensService;
 import com.pg.generate.util.Common;
-import com.pg.generate.util.WriteFile;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,26 +54,30 @@ public class GensServiceImpl implements GensService {
         // 表注释
         String tableComment = genTableInfo.getTableComment();
 
+        VelocityEngine velocityEngine = new VelocityEngine();
+        velocityEngine.getTemplate("templates\\java\\entity.java.vm");
 
-        // 实例的模板数据
-        String genEntityTemplate = GenEntity.genEntity(myPackage, tableName, tableColumnAll);
-        WriteFile.writeFile(getPath() + "\\entity", tableName, genEntityTemplate);
-        // Dao的模板数据
-        String genDaoTemplate = GenDaoTemplate.genDaoTemplate(myPackage, tableName, defaultTableName);
-        WriteFile.writeFile(getPath() + "\\dao", tableName + "Mapper", genDaoTemplate);
-        // Mapper的模板数据
-        String genMapper = GenMapper.genMapper(myPackage + ".dao." + tableName + "Mapper", myPackage + ".entity." + tableName, tableName, myTableName, tableColumnAll);
-        WriteFile.writeFileXml(getMapperPath(), tableName + "Mapper", genMapper);
-        // Service的模本数据
-        String genServiceTemplate = GenServiceTemplate.genServiceTemplate(myPackage + ".service", tableName, defaultTableName);
-        WriteFile.writeFile(getPath() + "\\service", tableName + "Service", genServiceTemplate);
-        // ServiceImpl的模板数据
-        String genServiceImpl = GenServiceImpl.genServiceImpl(myPackage, tableName, defaultTableName);
-        WriteFile.writeFile(getPath() + "\\service\\impl", tableName + "ServiceImpl", genServiceImpl);
-        // Controller的模板数据
-        String genController = GenController.genController(myPackage, tableName, defaultTableName, tableComment);
-        System.out.println(genController);
-        WriteFile.writeFile(getPath() + "\\controller", tableName + "Controller", genController);
+//        // 实例的模板数据
+//        String genEntityTemplate = GenEntity.genEntity(myPackage, tableName, tableColumnAll);
+//        WriteFile.writeFile(getPath() + "\\entity", tableName, genEntityTemplate);
+//        // Dao的模板数据
+//        String genDaoTemplate = GenDaoTemplate.genDaoTemplate(myPackage, tableName, defaultTableName);
+//        WriteFile.writeFile(getPath() + "\\dao", tableName + "Mapper", genDaoTemplate);
+//        // Mapper的模板数据
+//        String genMapper = GenMapper.genMapper(myPackage + ".dao." + tableName + "Mapper", myPackage + ".entity." + tableName, tableName, myTableName, tableColumnAll);
+//        WriteFile.writeFileXml(getMapperPath(), tableName + "Mapper", genMapper);
+//        // Service的模本数据
+//        String genServiceTemplate = GenServiceTemplate.genServiceTemplate(myPackage + ".service", tableName, defaultTableName);
+//        WriteFile.writeFile(getPath() + "\\service", tableName + "Service", genServiceTemplate);
+//        // ServiceImpl的模板数据
+//        String genServiceImpl = GenServiceImpl.genServiceImpl(myPackage, tableName, defaultTableName);
+//        WriteFile.writeFile(getPath() + "\\service\\impl", tableName + "ServiceImpl", genServiceImpl);
+//        // Controller的模板数据
+//        String genController = GenController.genController(myPackage, tableName, defaultTableName, tableComment);
+//        System.out.println(genController);
+//        WriteFile.writeFile(getPath() + "\\controller", tableName + "Controller", genController);
+
+
         return 0;
     }
 
@@ -77,6 +87,28 @@ public class GensServiceImpl implements GensService {
 
     public static String getMapperPath() {
         return ProjectPath + "\\" + mapperPath;
+    }
+
+
+    public static List<String> getTemplateList() {
+        List<String> templates = new ArrayList<>();
+        templates.add("vm/java/entity.java.vm");
+        return templates;
+    }
+
+    public static void main(String[] args) {
+
+        VelocityInitializer.initVelocity();
+
+        List<String> templateList = getTemplateList();
+        for (String template : templateList) {
+            VelocityContext context = new VelocityContext();
+            Template template1 = Velocity.getTemplate(template, "UTF-8");
+            Object data = template1.getData();
+
+            System.out.println(data.toString());
+        }
+
     }
 
 }
