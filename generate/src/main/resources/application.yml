@@ -4,6 +4,10 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .tlf
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"

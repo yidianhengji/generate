@@ -8,5 +8,5 @@ public interface GensService {
      * 生成实体信息
      * @param genTableInfo
      */
-    int GenEntity(GenTableInfo genTableInfo);
+    int GenTemplate(GenTableInfo genTableInfo);
 }
