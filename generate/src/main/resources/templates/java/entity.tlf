@@ -9,6 +9,7 @@ import java.util.Date;
 public class [(${ClassName})] {
 
     [(${tableColumnAll})]
+    [(th:each ="entry,star:${tableColumnAll})]
 
     @ApiModelProperty(value = "数据库名称")
     private String tableSchema;

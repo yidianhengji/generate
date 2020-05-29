@@ -31,7 +31,7 @@ public class [(${ClassName})]Controller {
     public ResultPage<[(${ClassName})]> queryPage(@RequestBody [(${ClassName})] [(${className})]) {
         log.info("活动模块-分页查询，参数[(${className})]={}", [(${className})]);
         Page<[(${ClassName})]> page = [(${className})]Service.queryPage([(${className})]);
-        PageInfo<[(${ClassName})]> pageInfo = new PageInfo<>(page);
+        PageInfo<[(${ClassName})]> pageInfo = new PageInfo<[(${ClassName})]>(page);
         return new ResultPage<[(${ClassName})]>(BusinessStatus.SUCCESS_GET, pageInfo);
     }
 
@@ -56,7 +56,7 @@ public class [(${ClassName})]Controller {
     public Result<[(${ClassName})]> insert(@RequestBody [(${ClassName})] [(${className})]) {
         log.info("活动模块-新增，参数[(${className})]={}", [(${className})]);
         [(${className})]Service.insert([(${className})]);
-        return new Result<>(BusinessStatus.SUCCESS_ADD);
+        return new Result<[(${ClassName})]>(BusinessStatus.SUCCESS_ADD);
     }
 
     @ApiOperation("修改")
@@ -64,7 +64,7 @@ public class [(${ClassName})]Controller {
     public Result<[(${ClassName})]> update(@RequestBody [(${ClassName})] [(${className})]) {
         log.info("活动模块-修改，参数[(${className})]={}", [(${className})]);
         [(${className})]Service.update([(${className})]);
-        return new Result<>(BusinessStatus.SUCCESS_UPDATE);
+        return new Result<[(${ClassName})]>(BusinessStatus.SUCCESS_UPDATE);
     }
 
     @ApiOperation("删除")
@@ -72,7 +72,7 @@ public class [(${ClassName})]Controller {
     public Result<[(${ClassName})]> delete(@RequestParam String uuid) {
         log.info("活动模块-删除，参数uuid={}", uuid);
         [(${className})]Service.delete(uuid);
-        return new Result<>(BusinessStatus.SUCCESS_DELETE);
+        return new Result<[(${ClassName})]>(BusinessStatus.SUCCESS_DELETE);
     }
 
 }
