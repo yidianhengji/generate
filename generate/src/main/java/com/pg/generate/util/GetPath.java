@@ -20,4 +20,8 @@ public class GetPath {
     public static String getMapperPath() {
         return ProjectPath + "\\" + mapperPath;
     }
+
+    public static String getPackageName() {
+        return myPackage;
+    }
 }

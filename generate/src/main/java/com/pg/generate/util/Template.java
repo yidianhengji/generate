@@ -13,6 +13,9 @@ public class Template {
         List<String> templates = new ArrayList<String>();
         templates.add("java/entity");
         templates.add("java/dao");
+        templates.add("java/service");
+        templates.add("java/serviceImpl");
+        templates.add("java/controller");
         return templates;
     }
 

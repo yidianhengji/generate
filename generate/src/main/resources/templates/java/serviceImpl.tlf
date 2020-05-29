@@ -1,0 +1,65 @@
+package [(${packageName})].service.impl;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.util.StringUtil;
+import [(${packageName})].dao.[(${ClassName})]Mapper;
+import [(${packageName})].entity.[(${ClassName})];
+import [(${packageName})].handler.BusinessException;
+import [(${packageName})].service.[(${ClassName})]Service;
+import org.springframework.stereotype.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class [(${ClassName})]ServiceImpl implements [(${ClassName})]Service {
+
+    @Autowired
+    private [(${ClassName})]Mapper [(${className})]Mapper;
+
+    @Override
+    public Page<[(${ClassName})]> queryPage([(${ClassName})] [(${className})]) {
+        if ([(${className})].getPageSize() != null && [(${className})].getPageNum() != null) {
+            PageHelper.startPage([(${className})].getPageNum(), [(${className})].getPageSize());
+        }
+        Page<[(${ClassName})]> pages = this.[(${className})]Mapper.queryPage([(${className})]);
+        return pages;
+    }
+
+    @Override
+    public List<[(${ClassName})]> queryAll() {
+        List<[(${ClassName})]> list = this.[(${className})]Mapper.queryAll();
+        return list;
+    }
+
+    @Override
+    public [(${ClassName})] queryOne(String uuid) {
+        [(${ClassName})] one = this.[(${className})]Mapper.queryOne(uuid);
+        return one;
+    }
+
+    @Override
+    public int insert([(${ClassName})] [(${className})]) {
+        [(${className})].setUuid(UUID.randomUUID().toString().replace("-", ""));
+        [(${className})].setCreateTime(new Date());
+        [(${className})].setModifyTime(new Date());
+        return this.[(${className})]Mapper.insert([(${className})]);
+    }
+
+    @Override
+    public int update([(${ClassName})] [(${className})]) {
+        if (StringUtil.isEmpty([(${className})].getUuid())) {
+            throw new BusinessException(500, "uuid必传");
+        }
+        [(${className})].setModifyTime(new Date());
+        return this.[(${className})]Mapper.update([(${className})]);
+    }
+
+    @Override
+    public int delete(String uuid) {
+        return this.[(${className})]Mapper.delete(uuid);
+    }
+}
