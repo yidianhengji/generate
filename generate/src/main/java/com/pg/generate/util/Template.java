@@ -19,4 +19,10 @@ public class Template {
         return templates;
     }
 
+    public static List<String> getTemplateVmList() {
+        List<String> templates = new ArrayList<>();
+        templates.add("templates/java/entity.vm");
+        return templates;
+    }
+
 }
