@@ -21,7 +21,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog title="提示" :visible.sync="centerDialogVisible" width="60%">
+    <el-dialog title="代码预览" :visible.sync="centerDialogVisible" width="60%">
       <el-tabs v-model="activeName">
         <el-tab-pane label="entity.java" name="entity">
           <pre>{{tabArrar["templates/java/entity.vm"]}}</pre>
