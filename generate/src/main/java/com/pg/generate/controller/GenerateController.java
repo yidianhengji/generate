@@ -1,6 +1,5 @@
 package com.pg.generate.controller;
 
-import com.pg.generate.dto.GenTableInfo;
 import com.pg.generate.entity.Tables;
 import com.pg.generate.entity.TablesSchema;
 import com.pg.generate.handler.BusinessStatus;
@@ -11,6 +10,7 @@ import com.pg.generate.service.TablesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RequestMapping(value = "/api/gen")
@@ -39,9 +39,9 @@ public class GenerateController {
     }
 
     @GetMapping(value = "/genTemplate")
-    public int genTemplate(@RequestParam String tableSchema, @RequestParam String tableName) {
-        gensService.GenTemplate(tableSchema, tableName);
-        return 0;
+    public Result<HashMap<Object, String>> genTemplate(@RequestParam String tableSchema, @RequestParam String tableName) {
+        HashMap<Object, String> hashMap = gensService.GenTemplate(tableSchema, tableName);
+        return new Result<>(BusinessStatus.SUCCESS, hashMap);
     }
 
 

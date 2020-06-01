@@ -1,7 +1,6 @@
 package com.pg.generate.service.impl;
 
 import com.pg.generate.dao.TablesSchemaMapper;
-import com.pg.generate.dto.GenTableInfo;
 import com.pg.generate.entity.TablesSchema;
 import com.pg.generate.service.GensService;
 import com.pg.generate.util.Common;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -29,7 +29,7 @@ public class GensServiceImpl implements GensService {
      * @param tableName
      */
     @Override
-    public int GenTemplate(String tableSchema, String tableName) {
+    public HashMap<Object, String> GenTemplate(String tableSchema, String tableName) {
         // 查询到表的数据
         List<TablesSchema> tableColumnAll = tablesSchemaMapper.queryTableColumnAll(tableSchema, tableName);
         // 初始化表信息
@@ -58,15 +58,16 @@ public class GensServiceImpl implements GensService {
         context.put("className", className);
         context.put("tableColumnAll", tablesSchemas);
         context.put("columnPriKey", columnPriKey);
-        // 实例化一个StringWriter
-        StringWriter writer = new StringWriter();
         // 从src目录下加载hello.vm模板
         List<String> templateVmList = Template.getTemplateVmList();
+        HashMap<Object, String> hashMap = new HashMap<>();
         for (String templatesPath : templateVmList) {
+            // 实例化一个StringWriter
+            StringWriter writer = new StringWriter();
             velocityEngine.mergeTemplate(templatesPath, "UTF-8", context, writer);
-            System.out.println(writer.toString());
+            hashMap.put(templatesPath, writer.toString());
         }
-        return 0;
+        return hashMap;
     }
 
 }

@@ -2,6 +2,8 @@ package com.pg.generate.service;
 
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
+
 public interface GensService {
 
     /**
@@ -10,5 +12,5 @@ public interface GensService {
      * @param tableName
      * @return
      */
-    int GenTemplate(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
+    HashMap<Object, String> GenTemplate(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
 }
