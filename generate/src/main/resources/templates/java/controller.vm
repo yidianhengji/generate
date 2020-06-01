@@ -1,0 +1,78 @@
+package ${packageName}.controller;
+
+import com.github.pagehelper.Page;
+import ${packageName}.entity.${ClassName};
+import ${packageName}.handler.BusinessStatus;
+import ${packageName}.handler.PageInfo;
+import ${packageName}.handler.Result;
+import ${packageName}.handler.ResultPage;
+import ${packageName}.service.${ClassName}Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Api(tags = "活动模块")
+@RequestMapping("/api/${className}")
+@RestController
+public class ${ClassName}Controller {
+
+    private static Logger log = LoggerFactory.getLogger(${ClassName}Controller.class);
+
+    @Resource
+    private ${ClassName}Service ${className}Service;
+
+    @ApiOperation("分页查询")
+    @PostMapping(value = "/queryPage")
+    public ResultPage<${ClassName}> queryPage(@RequestBody ${ClassName} ${className}) {
+        log.info("活动模块-分页查询，参数${className}={}", ${className});
+        Page<${ClassName}> page = ${className}Service.queryPage(${className});
+        PageInfo<${ClassName}> pageInfo = new PageInfo<${ClassName}>(page);
+        return new ResultPage<${ClassName}>(BusinessStatus.SUCCESS_GET, pageInfo);
+    }
+
+    @ApiOperation("查询全部")
+    @GetMapping(value = "/queryAll")
+    public Result<List<${ClassName}>> queryAll() {
+        log.info("活动模块-查询全部，参数${className}={}");
+        List<${ClassName}> list = ${className}Service.queryAll();
+        return new Result<List<${ClassName}>>(BusinessStatus.SUCCESS_GET, list);
+    }
+
+    @ApiOperation("查询单条记录")
+    @GetMapping(value = "/queryOne")
+    public Result<${ClassName}> queryOne(@RequestParam String ${columnPriKey}) {
+        log.info("活动模块-查询单条记录，参数${columnPriKey}={}", ${columnPriKey});
+        ${ClassName} one = ${className}Service.queryOne(${columnPriKey});
+        return new Result<${ClassName}>(BusinessStatus.SUCCESS_GET, one);
+    }
+
+    @ApiOperation("新增")
+    @PostMapping(value = "/save")
+    public Result<${ClassName}> insert(@RequestBody ${ClassName} ${className}) {
+        log.info("活动模块-新增，参数${className}={}", ${className});
+        ${className}Service.insert(${className});
+        return new Result<${ClassName}>(BusinessStatus.SUCCESS_ADD);
+    }
+
+    @ApiOperation("修改")
+    @PutMapping(value = "/update")
+    public Result<${ClassName}> update(@RequestBody ${ClassName} ${className}) {
+        log.info("活动模块-修改，参数${className}={}", ${className});
+        ${className}Service.update(${className});
+        return new Result<${ClassName}>(BusinessStatus.SUCCESS_UPDATE);
+    }
+
+    @ApiOperation("删除")
+    @DeleteMapping(value = "/delete")
+    public Result<${ClassName}> delete(@RequestParam String ${columnPriKey}) {
+        log.info("活动模块-删除，参数${columnPriKey}={}", ${columnPriKey});
+        ${className}Service.delete(${columnPriKey});
+        return new Result<${ClassName}>(BusinessStatus.SUCCESS_DELETE);
+    }
+
+}

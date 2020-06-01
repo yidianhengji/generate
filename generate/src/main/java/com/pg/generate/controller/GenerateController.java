@@ -38,12 +38,9 @@ public class GenerateController {
         return new Result<List<TablesSchema>>(BusinessStatus.SUCCESS, tables);
     }
 
-    @PostMapping(value = "/genTemplate")
-    public int genTemplate() {
-        GenTableInfo genTableInfo = new GenTableInfo();
-        genTableInfo.setTableSchema("bbs_sifou");
-        genTableInfo.setTableName("tb_users_info");
-        gensService.GenTemplate(genTableInfo);
+    @GetMapping(value = "/genTemplate")
+    public int genTemplate(@RequestParam String tableSchema, @RequestParam String tableName) {
+        gensService.GenTemplate(tableSchema, tableName);
         return 0;
     }
 

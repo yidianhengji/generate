@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageName}.dao.${ClassName}Mapper">
+
+    <resultMap type="${packageName}.entity.${ClassName}" id="${ClassName}Map">
+#foreach ($item in $tableColumnAll)
+        <result property="${item.javaColumnName}" column="${item.columnName}" />
+#end
+    </resultMap>
+
+    <select id="queryPage" resultMap="${ClassName}Map">
+        SELECT * FROM ${tableName}
+    </select>
+
+    <select id="queryAll" resultMap="${ClassName}Map">
+        SELECT * FROM ${tableName}
+    </select>
+
+    <select id="queryOne" resultMap="${ClassName}Map">
+        select * from ${tableName} where ${columnPriKey} = #{${columnPriKey}}
+    </select>
+
+    <insert id="insert">
+#set($insertKey = "")
+#set($insertValue = "")
+#foreach ($item in $tableColumnAll)
+    #set($insertKey=$insertKey+$item.javaColumnName+",")
+    #set($insertValue=$insertValue+"#{${item.columnName}},")
+#end
+#set($insertKey=$insertKey.substring(0,$insertKey.lastIndexOf(',')))
+#set($insertValue=$insertValue.substring(0,$insertValue.lastIndexOf(',')))
+        insert into ${tableName}( ${insertKey} )
+        values ( ${insertValue} )
+    </insert>
+
+    <update id="update">
+        update ${tableName}
+        <set>
+#foreach ($item in $tableColumnAll)
+            <if test="${item.javaColumnName} != null and ${item.javaColumnName} != ''">
+                ${item.columnName} = #{${item.javaColumnName}},
+            </if>
+#end
+        </set>
+        where ${columnPriKey} = #{${columnPriKey}}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM ${tableName} WHERE ${columnPriKey} = #{${columnPriKey}}
+    </delete>
+
+</mapper>

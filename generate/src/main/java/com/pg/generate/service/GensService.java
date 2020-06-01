@@ -1,12 +1,14 @@
 package com.pg.generate.service;
 
-import com.pg.generate.dto.GenTableInfo;
+import org.apache.ibatis.annotations.Param;
 
 public interface GensService {
 
     /**
      * 生成实体信息
-     * @param genTableInfo
+     * @param tableSchema
+     * @param tableName
+     * @return
      */
-    int GenTemplate(GenTableInfo genTableInfo);
+    int GenTemplate(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
 }

@@ -1,7 +1,18 @@
-${user}
-${password}
-${age}
+package ${packageName}.entity;
 
-#foreach($TestVO in $List)
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class ${ClassName} {
+
+#foreach ($item in $tableColumnAll)
+#if($item.columnComment != "")
+    @ApiModelProperty(value = ${item.columnComment})
+#end
+    private String $item.javaColumnName;
 
 #end
+}
