@@ -6,3 +6,6 @@ export const resGenGetTable = () =>
 
 export const resGenGetTableColumn = data =>
   request(API_PATH + "gen/genTableColumn", data, "GET");
+
+export const resGenGenTemplate = data =>
+  request(API_PATH + "gen/genTemplate", data, "GET");
