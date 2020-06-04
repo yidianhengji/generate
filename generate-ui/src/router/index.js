@@ -5,6 +5,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/project',
+    name: 'Project',
+    component: () => import('@/views/project/project.vue')
+  },
+  {
     path: '/',
     name: 'Layout',
     component: () => import('@/layout'),
