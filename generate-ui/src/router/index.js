@@ -5,18 +5,18 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/project',
+    path: '/',
     name: 'Project',
     component: () => import('@/views/project/project.vue')
   },
   {
-    path: '/',
+    path: '/home',
     name: 'Layout',
     component: () => import('@/layout'),
     children: [
-      { path: "/", redirect: "/home" },
+      { path: "/home", redirect: "/home/home" },
       {
-        path: "/home",
+        path: "/home/home",
         name: "首页",
         component: () => import("@/views/Home.vue")
       },

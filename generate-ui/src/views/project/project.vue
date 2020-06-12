@@ -2,50 +2,13 @@
   <div class="app-wrapper">
     <ul class="project-list">
       <li class="active">
-        <h4>+</h4>
-        <p>创建新项目</p>
+        <div>
+          <h4>+</h4>
+          <p>创建新项目</p>
+        </div>
       </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
-      </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
-      </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
-      </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
-      </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
-      </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
-      </li>
-      <li>
-        <img
-          src="http://172.18.1.67:8080/profile/upload/2020/06/02/38a43b013b0c72956159e229d0aa9be0.jpg"
-          alt
-        />
+      <li v-for="(item, index) in 5" :key="index" @click="handleClick">
+        <div>项目1</div>
       </li>
     </ul>
   </div>
@@ -53,7 +16,12 @@
 
 <script>
 export default {
-  name: "Project"
+  name: "Project",
+  methods: {
+    handleClick() {
+      this.$router.push("/home");
+    }
+  }
 };
 </script>
 
@@ -73,6 +41,29 @@ export default {
       margin-right: 10px;
       margin-bottom: 10px;
       height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #eee;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: 2s;
+
+      &.active {
+        background: #eee;
+
+        > div {
+          text-align: center;
+
+          h4 {
+            font-size: 60px;
+          }
+        }
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
 
       &:nth-child(6n+6) {
         margin-right: 0px;
@@ -81,6 +72,8 @@ export default {
       img {
         width: 100%;
         height: 100%;
+        border: 1px solid #ccc;
+        display: block;
       }
     }
   }
