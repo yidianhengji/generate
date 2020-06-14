@@ -36,14 +36,14 @@ public class ${ClassName}ServiceImpl implements ${ClassName}Service {
     }
 
     @Override
-    public ${ClassName} queryOne(String ${columnPriKey}) {
-        ${ClassName} one = this.${className}Mapper.queryOne(${columnPriKey});
+    public ${ClassName} queryOne(String ${setColumnPriKeyMapper}) {
+        ${ClassName} one = this.${className}Mapper.queryOne(${setColumnPriKeyMapper});
         return one;
     }
 
     @Override
     public int insert(${ClassName} ${className}) {
-        ${className}.setUuid(UUID.randomUUID().toString().replace("-", ""));
+        ${className}.set${setColumnPriKey}(UUID.randomUUID().toString().replace("-", ""));
         ${className}.setCreateTime(new Date());
         ${className}.setModifyTime(new Date());
         return this.${className}Mapper.insert(${className});
@@ -51,7 +51,7 @@ public class ${ClassName}ServiceImpl implements ${ClassName}Service {
 
     @Override
     public int update(${ClassName} ${className}) {
-        if (StringUtil.isEmpty(${className}.getUuid())) {
+        if (StringUtil.isEmpty(${className}.get${setColumnPriKey}())) {
             throw new BusinessException(500, "${columnPriKey}必传");
         }
         ${className}.setModifyTime(new Date());
@@ -59,7 +59,7 @@ public class ${ClassName}ServiceImpl implements ${ClassName}Service {
     }
 
     @Override
-    public int delete(String ${columnPriKey}) {
-        return this.${className}Mapper.delete(${columnPriKey});
+    public int delete(String ${setColumnPriKeyMapper}) {
+        return this.${className}Mapper.delete(${setColumnPriKeyMapper});
     }
 }

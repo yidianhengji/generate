@@ -45,9 +45,9 @@ public class ${ClassName}Controller {
 
     @ApiOperation("查询单条记录")
     @GetMapping(value = "/queryOne")
-    public Result<${ClassName}> queryOne(@RequestParam String ${columnPriKey}) {
-        log.info("活动模块-查询单条记录，参数${columnPriKey}={}", ${columnPriKey});
-        ${ClassName} one = ${className}Service.queryOne(${columnPriKey});
+    public Result<${ClassName}> queryOne(@RequestParam String ${setColumnPriKeyMapper}) {
+        log.info("活动模块-查询单条记录，参数${setColumnPriKeyMapper}={}", ${setColumnPriKeyMapper});
+        ${ClassName} one = ${className}Service.queryOne(${setColumnPriKeyMapper});
         return new Result<${ClassName}>(BusinessStatus.SUCCESS_GET, one);
     }
 
@@ -69,9 +69,9 @@ public class ${ClassName}Controller {
 
     @ApiOperation("删除")
     @DeleteMapping(value = "/delete")
-    public Result<${ClassName}> delete(@RequestParam String ${columnPriKey}) {
-        log.info("活动模块-删除，参数${columnPriKey}={}", ${columnPriKey});
-        ${className}Service.delete(${columnPriKey});
+    public Result<${ClassName}> delete(@RequestParam String ${setColumnPriKeyMapper}) {
+        log.info("活动模块-删除，参数${setColumnPriKeyMapper}={}", ${setColumnPriKeyMapper});
+        ${className}Service.delete(${setColumnPriKeyMapper});
         return new Result<${ClassName}>(BusinessStatus.SUCCESS_DELETE);
     }
 

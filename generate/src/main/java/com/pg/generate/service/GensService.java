@@ -12,5 +12,5 @@ public interface GensService {
      * @param tableName
      * @return
      */
-    HashMap<Object, String> GenTemplate(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
+    HashMap<Object, String> GenTemplate(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName, @Param("type") Integer type);
 }

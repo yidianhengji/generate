@@ -10,9 +10,21 @@ public class ${ClassName} {
 
 #foreach ($item in $tableColumnAll)
 #if($item.columnComment != "")
-    @ApiModelProperty(value = ${item.columnComment})
+    @ApiModelProperty(value = "${item.columnComment}")
 #end
+#if($item.dataType=="varchar")
     private String $item.javaColumnName;
 
+#elseif($item.dataType=="int")
+    private Integer $item.javaColumnName;
+
+#elseif($item.dataType=="datetime")
+    private Date $item.javaColumnName;
+
 #end
+#end
+    private Integer PageSize;
+
+    private Integer PageNum;
+
 }

@@ -11,12 +11,12 @@ public interface ${ClassName}Service {
 
     List<${ClassName}> queryAll();
 
-    ${ClassName} queryOne(String ${columnPriKey});
+    ${ClassName} queryOne(String ${setColumnPriKeyMapper});
 
     int insert(${ClassName} ${className});
 
     int update(${ClassName} ${className});
 
-    int delete(String ${columnPriKey});
+    int delete(String ${setColumnPriKeyMapper});
 
 }

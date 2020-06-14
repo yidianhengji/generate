@@ -17,15 +17,15 @@
     </select>
 
     <select id="queryOne" resultMap="${ClassName}Map">
-        select * from ${tableName} where ${columnPriKey} = #{${columnPriKey}}
+        select * from ${tableName} where ${columnPriKey} = #{${setColumnPriKeyMapper}}
     </select>
 
     <insert id="insert">
 #set($insertKey = "")
 #set($insertValue = "")
 #foreach ($item in $tableColumnAll)
-    #set($insertKey=$insertKey+$item.javaColumnName+",")
-    #set($insertValue=$insertValue+"#{${item.columnName}},")
+    #set($insertKey=$insertKey+$item.columnName+",")
+    #set($insertValue=$insertValue+"#{${item.javaColumnName}},")
 #end
 #set($insertKey=$insertKey.substring(0,$insertKey.lastIndexOf(',')))
 #set($insertValue=$insertValue.substring(0,$insertValue.lastIndexOf(',')))
@@ -37,16 +37,22 @@
         update ${tableName}
         <set>
 #foreach ($item in $tableColumnAll)
+#if($item.dataType!="datetime")
             <if test="${item.javaColumnName} != null and ${item.javaColumnName} != ''">
                 ${item.columnName} = #{${item.javaColumnName}},
             </if>
+#else
+            <if test="${item.javaColumnName} != null">
+                ${item.columnName} = #{${item.javaColumnName}},
+            </if>
+#end
 #end
         </set>
-        where ${columnPriKey} = #{${columnPriKey}}
+        where ${columnPriKey} = #{${setColumnPriKeyMapper}}
     </update>
 
     <delete id="delete">
-        DELETE FROM ${tableName} WHERE ${columnPriKey} = #{${columnPriKey}}
+        DELETE FROM ${tableName} WHERE ${columnPriKey} = #{${setColumnPriKeyMapper}}
     </delete>
 
 </mapper>

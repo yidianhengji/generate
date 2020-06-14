@@ -39,8 +39,8 @@ public class GenerateController {
     }
 
     @GetMapping(value = "/genTemplate")
-    public Result<HashMap<Object, String>> genTemplate(@RequestParam String tableSchema, @RequestParam String tableName) {
-        HashMap<Object, String> hashMap = gensService.GenTemplate(tableSchema, tableName);
+    public Result<HashMap<Object, String>> genTemplate(@RequestParam String tableSchema, @RequestParam String tableName, @RequestParam Integer type) {
+        HashMap<Object, String> hashMap = gensService.GenTemplate(tableSchema, tableName, type);
         return new Result<>(BusinessStatus.SUCCESS, hashMap);
     }
 

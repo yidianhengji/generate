@@ -16,7 +16,7 @@
         FROM
           information_schema. tables
         WHERE
-          table_schema = 'bbs_sifou'
+          table_schema = 'generate'
     </select>
 
 </mapper>

@@ -21,6 +21,6 @@ nginxPath:  http://localhost:8060/tup/
 
 jdbc:
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/bbs_sifou?userUnicode=true&characterEncoding=utf-8&useSSL=false
+  url: jdbc:mysql://localhost:3306/generate?userUnicode=true&characterEncoding=utf-8&useSSL=false
   username: root
   password: 123456

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pg.generate.dao.TableMapper">
+
+    <resultMap type="com.pg.generate.entity.Table" id="TableMap">
+        <result property="tableId" column="table_id" />
+        <result property="projectId" column="project_id" />
+        <result property="tableSchema" column="table_schema" />
+        <result property="tableName" column="table_name" />
+        <result property="tableCollation" column="table_collation" />
+        <result property="tableComment" column="table_comment" />
+        <result property="createTime" column="create_time" />
+        <result property="modifyTime" column="modify_time" />
+    </resultMap>
+
+    <select id="queryPage" resultMap="TableMap">
+        SELECT * FROM table
+    </select>
+
+    <select id="queryAll" resultMap="TableMap">
+        SELECT * FROM table
+    </select>
+
+    <select id="queryOne" resultMap="TableMap">
+        select * from table where table_id = #{tableId}
+    </select>
+
+    <insert id="insert">
+        insert into table( table_id,project_id,table_schema,table_name,table_collation,table_comment,create_time,modify_time )
+        values ( #{tableId},#{projectId},#{tableSchema},#{tableName},#{tableCollation},#{tableComment},#{createTime},#{modifyTime} )
+    </insert>
+
+    <update id="update">
+        update table
+        <set>
+            <if test="tableId != null and tableId != ''">
+                table_id = #{tableId},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="tableSchema != null and tableSchema != ''">
+                table_schema = #{tableSchema},
+            </if>
+            <if test="tableName != null and tableName != ''">
+                table_name = #{tableName},
+            </if>
+            <if test="tableCollation != null and tableCollation != ''">
+                table_collation = #{tableCollation},
+            </if>
+            <if test="tableComment != null and tableComment != ''">
+                table_comment = #{tableComment},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+        </set>
+        where table_id = #{tableId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM table WHERE table_id = #{tableId}
+    </delete>
+
+</mapper>
