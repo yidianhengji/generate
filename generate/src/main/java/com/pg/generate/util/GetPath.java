@@ -3,7 +3,7 @@ package com.pg.generate.util;
 public class GetPath {
 
     // 项目所在的路径
-    private static final String ProjectPath = "G:\\work\\generate\\generate";
+    private static final String ProjectPath = "F:\\shop\\generate\\generate";
     // java地址
     private static final String JavaPath = "src\\main\\java";
     // 项目包名

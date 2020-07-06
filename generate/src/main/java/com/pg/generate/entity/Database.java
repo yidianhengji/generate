@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Table {
+public class Database {
 
     @ApiModelProperty(value = "数据库id")
     private String tableId;

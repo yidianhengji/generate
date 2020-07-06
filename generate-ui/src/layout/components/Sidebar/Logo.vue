@@ -1,8 +1,8 @@
 <template>
   <div class="sidebar-logo-container">
     <div class="sidebar-logo-link">
-      <img class="sidebar-logo" src="../../../assets/logo.png" />
-      <h1 class="sidebar-title">数字化设计协同管理平台</h1>
+      <img class="sidebar-logo" src="../../../assets/icon.png" />
+      <h1 class="sidebar-title">多项目管理与配置</h1>
     </div>
   </div>
 </template>

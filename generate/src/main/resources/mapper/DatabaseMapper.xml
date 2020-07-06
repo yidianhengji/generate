@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pg.generate.dao.TableMapper">
+<mapper namespace="com.pg.generate.dao.DatabaseMapper">
 
-    <resultMap type="com.pg.generate.entity.Table" id="TableMap">
+    <resultMap type="com.pg.generate.entity.Database" id="DatabaseMap">
         <result property="tableId" column="table_id" />
         <result property="projectId" column="project_id" />
         <result property="tableSchema" column="table_schema" />
@@ -13,25 +13,25 @@
         <result property="modifyTime" column="modify_time" />
     </resultMap>
 
-    <select id="queryPage" resultMap="TableMap">
-        SELECT * FROM table
+    <select id="queryPage" resultMap="DatabaseMap">
+        SELECT * FROM tb_database
     </select>
 
-    <select id="queryAll" resultMap="TableMap">
-        SELECT * FROM table
+    <select id="queryAll" resultMap="DatabaseMap">
+        SELECT * FROM tb_database
     </select>
 
-    <select id="queryOne" resultMap="TableMap">
-        select * from table where table_id = #{tableId}
+    <select id="queryOne" resultMap="DatabaseMap">
+        select * from tb_database where table_id = #{tableId}
     </select>
 
     <insert id="insert">
-        insert into table( table_id,project_id,table_schema,table_name,table_collation,table_comment,create_time,modify_time )
+        insert into tb_database( table_id,project_id,table_schema,table_name,table_collation,table_comment,create_time,modify_time )
         values ( #{tableId},#{projectId},#{tableSchema},#{tableName},#{tableCollation},#{tableComment},#{createTime},#{modifyTime} )
     </insert>
 
     <update id="update">
-        update table
+        update tb_database
         <set>
             <if test="tableId != null and tableId != ''">
                 table_id = #{tableId},
@@ -62,7 +62,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM table WHERE table_id = #{tableId}
+        DELETE FROM tb_database WHERE table_id = #{tableId}
     </delete>
 
 </mapper>

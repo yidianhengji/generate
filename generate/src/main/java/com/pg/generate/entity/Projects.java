@@ -17,6 +17,9 @@ public class Projects {
     @ApiModelProperty(value = "1正常 2删除")
     private Integer flag;
 
+    @ApiModelProperty(value = "描述")
+    private String description;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 

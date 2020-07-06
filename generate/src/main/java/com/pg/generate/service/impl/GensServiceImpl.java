@@ -56,8 +56,9 @@ public class GensServiceImpl implements GensService {
         // 实例化一个VelocityContext
         VelocityContext context = new VelocityContext();
         // 向VelocityContext中放入键值
-        context.put("tableName", handleTableName);
-        context.put("packageName", GetPath.getPackageName());
+        context.put("table_name", tableName); // 表名称
+        context.put("tableName", handleTableName); // java实体类名称
+        context.put("packageName", GetPath.getPackageName()); //
         context.put("ClassName", ClassName);
         context.put("className", className);
         context.put("tableColumnAll", tablesSchemas);

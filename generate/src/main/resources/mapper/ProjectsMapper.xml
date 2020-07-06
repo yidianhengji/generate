@@ -6,29 +6,30 @@
         <result property="projectId" column="project_id" />
         <result property="projectName" column="project_name" />
         <result property="flag" column="flag" />
+        <result property="description" column="description" />
         <result property="createTime" column="create_time" />
         <result property="modifyTime" column="modify_time" />
     </resultMap>
 
     <select id="queryPage" resultMap="ProjectsMap">
-        SELECT * FROM projects
+        SELECT * FROM tb_projects
     </select>
 
     <select id="queryAll" resultMap="ProjectsMap">
-        SELECT * FROM projects
+        SELECT * FROM tb_projects
     </select>
 
     <select id="queryOne" resultMap="ProjectsMap">
-        select * from projects where project_id = #{projectId}
+        select * from tb_projects where project_id = #{projectId}
     </select>
 
     <insert id="insert">
-        insert into projects( project_id,project_name,flag,create_time,modify_time )
-        values ( #{projectId},#{projectName},#{flag},#{createTime},#{modifyTime} )
+        insert into tb_projects( project_id,project_name,flag,description,create_time,modify_time )
+        values ( #{projectId},#{projectName},#{flag},#{description},#{createTime},#{modifyTime} )
     </insert>
 
     <update id="update">
-        update projects
+        update tb_projects
         <set>
             <if test="projectId != null and projectId != ''">
                 project_id = #{projectId},
@@ -38,6 +39,9 @@
             </if>
             <if test="flag != null and flag != ''">
                 flag = #{flag},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
@@ -50,7 +54,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM projects WHERE project_id = #{projectId}
+        DELETE FROM tb_projects WHERE project_id = #{projectId}
     </delete>
 
 </mapper>

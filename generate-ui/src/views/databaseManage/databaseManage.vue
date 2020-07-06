@@ -17,6 +17,7 @@
       <el-table-column>
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">预览</el-button>
+          <el-button @click="handleClick2(scope.row)" type="text" size="small">下载</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -52,8 +53,8 @@
 </template>
 
 <script>
-import { resGenGetTable, resGenGenTemplate } from "../api";
-import { IS_OK } from "../api/path";
+import { resGenGetTable, resGenGenTemplate } from "../../api";
+import { IS_OK } from "../../api/path";
 export default {
   name: "Home",
   data() {
@@ -83,7 +84,9 @@ export default {
     handleClick(row) {
       this.centerDialogVisible = true;
       this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 2);
-      console.log(row);
+    },
+    handleClick2(row) {
+      this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 1);
     }
   }
 };

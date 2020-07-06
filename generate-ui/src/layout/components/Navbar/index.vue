@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Breadcrumb from "@/components/Breadcrumb";
+import Breadcrumb from "@/components/Breadcrumb/index.vue";
 export default {
   components: {
     Breadcrumb

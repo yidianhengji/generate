@@ -9,15 +9,15 @@
     </resultMap>
 
     <select id="queryPage" resultMap="${ClassName}Map">
-        SELECT * FROM ${tableName}
+        SELECT * FROM ${table_name}
     </select>
 
     <select id="queryAll" resultMap="${ClassName}Map">
-        SELECT * FROM ${tableName}
+        SELECT * FROM ${table_name}
     </select>
 
     <select id="queryOne" resultMap="${ClassName}Map">
-        select * from ${tableName} where ${columnPriKey} = #{${setColumnPriKeyMapper}}
+        select * from ${table_name} where ${columnPriKey} = #{${setColumnPriKeyMapper}}
     </select>
 
     <insert id="insert">
@@ -29,12 +29,12 @@
 #end
 #set($insertKey=$insertKey.substring(0,$insertKey.lastIndexOf(',')))
 #set($insertValue=$insertValue.substring(0,$insertValue.lastIndexOf(',')))
-        insert into ${tableName}( ${insertKey} )
+        insert into ${table_name}( ${insertKey} )
         values ( ${insertValue} )
     </insert>
 
     <update id="update">
-        update ${tableName}
+        update ${table_name}
         <set>
 #foreach ($item in $tableColumnAll)
 #if($item.dataType!="datetime")
@@ -52,7 +52,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM ${tableName} WHERE ${columnPriKey} = #{${setColumnPriKeyMapper}}
+        DELETE FROM ${table_name} WHERE ${columnPriKey} = #{${setColumnPriKeyMapper}}
     </delete>
 
 </mapper>
