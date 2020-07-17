@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 public class TablesSchema {
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(value = "字段名称")
     private String columnName;
 

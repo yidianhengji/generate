@@ -60,15 +60,15 @@ export default {
         },
         {
           id: "11",
-          name: "数据库管理",
-          icon: "el-icon-coin",
-          url: "/home"
-        },
-        {
-          id: "22",
           name: "项目地址",
           icon: "el-icon-map-location",
           url: "/projectPath"
+        },
+        {
+          id: "22",
+          name: "数据库管理",
+          icon: "el-icon-coin",
+          url: "/home"
         }
       ]
     };

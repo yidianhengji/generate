@@ -7,18 +7,18 @@
       </div>
       <div class="body">
         <ul>
-          <li v-for="(item,index) in 7" :key="index">
+          <li v-for="(item,index) in dataList" :key="index">
             <div class="top" :style="{background: colorArr[index%4]}"></div>
             <div class="bottom">
-              <h3>项目一</h3>
-              <p>提供具体完整案例的一站式研发解决方案的范例项目</p>
-              <span @click="handleLink">进入项目</span>
+              <h3>{{item.projectName}}</h3>
+              <p>{{item.description}}</p>
+              <span @click="handleLink(item.projectId)">进入项目</span>
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <el-drawer :visible.sync="drawer" :with-header="false">
+    <el-drawer :visible.sync="drawer" :with-header="false" :before-close="beforeClose">
       <div class="project-from">
         <h4>项目基本信息</h4>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
@@ -44,12 +44,15 @@
 </template>
 
 <script>
+import { resApiProjectsSave, resApiProjectsQueryAll } from "../../api";
+import { IS_OK } from "../../api/path";
 export default {
   name: "Project",
   data() {
     return {
       colorArr: ["#4ba8fa", "#fac23e", "#906cd9", "#7d91b3"],
       drawer: false,
+      dataList: [],
       ruleForm: {
         projectName: "",
         description: ""
@@ -62,11 +65,30 @@ export default {
       }
     };
   },
+  created() {
+    this.getResApiProjectsQueryAll();
+  },
   methods: {
+    async getResApiProjectsQueryAll() {
+      const res = await resApiProjectsQueryAll();
+      if (res.data.code === IS_OK) {
+        this.dataList = res.data.data;
+      }
+    },
     handleSubmit(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
-          alert("submit!");
+          const res = await resApiProjectsSave(this.ruleForm);
+          if (res.data.code === IS_OK) {
+            setTimeout(() => {
+              this.$message({
+                type: "success",
+                message: "新增成功"
+              });
+              this.getResApiProjectsQueryAll();
+              this.beforeClose();
+            }, 500);
+          }
         } else {
           console.log("error submit!!");
           return false;
@@ -76,8 +98,13 @@ export default {
     handleNewProjectBtn() {
       this.drawer = true;
     },
-    handleLink() {
-      this.$router.push("/home");
+    beforeClose() {
+      this.$refs.ruleForm.resetFields();
+      this.drawer = false;
+    },
+    handleLink(projectId) {
+      localStorage.setItem("projectId", projectId);
+      this.$router.push("/projectPath");
     }
   }
 };
