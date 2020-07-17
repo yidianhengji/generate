@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Api(tags = "活动模块")
+@Api(tags = "数据库模块")
 @RequestMapping("/api/database")
 @RestController
 public class DatabaseController {
