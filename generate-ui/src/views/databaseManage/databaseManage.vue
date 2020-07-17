@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div>
+      <el-button type="primary" size="small" @click="loadingUpdateBtn" :loading="loadingUpdate">更新表</el-button>
+    </div>
     <el-table
       ref="singleTable"
       border
@@ -204,8 +207,11 @@
 <script>
 import { resGenGetTable, resGenGenTemplate } from "../../api";
 import { IS_OK } from "../../api/path";
+import { databaseUpdate } from "./databaseUpdate.js";
+
 export default {
   name: "DatabaseManage",
+  mixins: [databaseUpdate],
   data() {
     return {
       tableData: [],
