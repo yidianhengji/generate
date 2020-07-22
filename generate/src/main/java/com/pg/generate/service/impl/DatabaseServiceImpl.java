@@ -30,8 +30,8 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public List<Database> queryAll() {
-        List<Database> list = this.databaseMapper.queryAll();
+    public List<Database> queryAll(String projectId) {
+        List<Database> list = this.databaseMapper.queryAll(projectId);
         return list;
     }
 

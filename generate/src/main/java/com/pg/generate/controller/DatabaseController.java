@@ -3,19 +3,16 @@ package com.pg.generate.controller;
 import com.github.pagehelper.Page;
 import com.pg.generate.entity.Database;
 import com.pg.generate.entity.Projects;
-import com.pg.generate.entity.TablesSchema;
 import com.pg.generate.handler.BusinessStatus;
 import com.pg.generate.handler.PageInfo;
 import com.pg.generate.handler.Result;
 import com.pg.generate.handler.ResultPage;
 import com.pg.generate.service.DatabaseService;
 import com.pg.generate.service.ProjectsService;
-import com.pg.generate.service.TablesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,6 +31,9 @@ public class DatabaseController {
     @Resource
     private ProjectsService projectsService;
 
+//    @Resource
+//    private ColumnService columnService;
+
     @ApiOperation("分页查询")
     @PostMapping(value = "/queryPage")
     public ResultPage<Database> queryPage(@RequestBody Database database) {
@@ -45,9 +45,9 @@ public class DatabaseController {
 
     @ApiOperation("查询全部")
     @GetMapping(value = "/queryAll")
-    public Result<List<Database>> queryAll() {
+    public Result<List<Database>> queryAll(String projectId) {
         log.info("活动模块-查询全部，参数database={}");
-        List<Database> list = databaseService.queryAll();
+        List<Database> list = databaseService.queryAll(projectId);
         return new Result<List<Database>>(BusinessStatus.SUCCESS_GET, list);
     }
 
@@ -97,7 +97,22 @@ public class DatabaseController {
                 databaseService.insert(item);
             }
         }
-        System.out.println(databasesList.toString());
+        // 查询全部的表
+        List<Database> queryAll = databaseService.queryAll(projectId);
+        if(queryAll.size()>0){
+            // 查询出来的表进行遍历
+            for(Database item : queryAll){
+                // 查询出表里面的字段
+//                List<Column> columns = columnService.queryTableColumnAll(item.getTableSchema(), item.getTableName());
+//                if(columns.size()>0){
+//                    // 把表里面的字段进行遍历
+//                    for(Column items : columns) {
+//                        columnService.insert(items);
+//                    }
+//                }
+            }
+        }
+
         return new Result<>(BusinessStatus.SUCCESS);
     }
 

@@ -21,6 +21,12 @@ public class ${ClassName} {
 #elseif($item.dataType=="datetime")
     private Date $item.javaColumnName;
 
+#elseif($item.dataType=="char")
+    private String $item.javaColumnName;
+
+#else
+    private String $item.javaColumnName;
+
 #end
 #end
     private Integer PageSize;

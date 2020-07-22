@@ -9,7 +9,7 @@ public interface DatabaseMapper {
 
     Page<Database> queryPage(Database database);
 
-    List<Database> queryAll();
+    List<Database> queryAll(String projectId);
 
     Database queryOne(String tableId);
 

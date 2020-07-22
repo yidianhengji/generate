@@ -27,7 +27,7 @@
     </select>
 
     <select id="queryAll" resultMap="DatabaseMap">
-        SELECT * FROM tb_database
+        SELECT * FROM tb_database where project_id = #{projectId}
     </select>
 
     <select id="queryOne" resultMap="DatabaseMap">
