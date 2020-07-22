@@ -2,15 +2,20 @@ package com.pg.generate.controller;
 
 import com.github.pagehelper.Page;
 import com.pg.generate.entity.Database;
+import com.pg.generate.entity.Projects;
+import com.pg.generate.entity.TablesSchema;
 import com.pg.generate.handler.BusinessStatus;
 import com.pg.generate.handler.PageInfo;
 import com.pg.generate.handler.Result;
 import com.pg.generate.handler.ResultPage;
 import com.pg.generate.service.DatabaseService;
+import com.pg.generate.service.ProjectsService;
+import com.pg.generate.service.TablesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,6 +30,9 @@ public class DatabaseController {
 
     @Resource
     private DatabaseService databaseService;
+
+    @Resource
+    private ProjectsService projectsService;
 
     @ApiOperation("分页查询")
     @PostMapping(value = "/queryPage")
@@ -73,6 +81,24 @@ public class DatabaseController {
         log.info("活动模块-删除，参数tableId={}", tableId);
         databaseService.delete(tableId);
         return new Result<Database>(BusinessStatus.SUCCESS_DELETE);
+    }
+
+    @ApiOperation("根据项目id查询数据库的表")
+    @GetMapping(value = "/getUpdateDataTable")
+    public Result<List<Database>> getUpdateDataTable(@RequestParam String projectId) {
+        // 根据项目id查询项目的记录
+        Projects one = projectsService.queryOne(projectId);
+        // 根据数据库名称查询 该数据库下面的全部表
+        databaseService.deleteProject(projectId);
+        List<Database> databasesList = databaseService.queryTableAll(one.getDatabaseName());
+        if(databasesList.size()>0){
+            for (Database item : databasesList) {
+                item.setProjectId(projectId);
+                databaseService.insert(item);
+            }
+        }
+        System.out.println(databasesList.toString());
+        return new Result<>(BusinessStatus.SUCCESS);
     }
 
 }

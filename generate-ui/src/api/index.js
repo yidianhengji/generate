@@ -14,3 +14,15 @@ export const resApiProjectsQueryOne = data => request(API_PATH + "projects/query
 export const resApiProjectsSave = data => request(API_PATH + "projects/save", data, "POST");
 export const resApiProjectsUpdate = data => request(API_PATH + "projects/update", data, "PUT");
 export const resApiProjectsDelete = data => request(API_PATH + "projects/delete", data, "DELETE");
+
+
+/**
+ * 数据库管理
+ */
+export const resApiDatabaseQueryPage = data => request(API_PATH + "database/queryPage", data, "POST");
+export const resApiDatabaseQueryAll = data => request(API_PATH + "database/queryAll", data, "GET");
+export const resApiDatabaseQueryOne = data => request(API_PATH + "database/queryOne", data, "GET");
+export const resApiDatabaseSave = data => request(API_PATH + "database/save", data, "POST");
+export const resApiDatabaseUpdate = data => request(API_PATH + "database/update", data, "PUT");
+export const resApiDatabaseDelete = data => request(API_PATH + "database/delete", data, "DELETE");
+export const resgetUpdateDataTable = data => request(API_PATH + "database/getUpdateDataTable", data, "GET");

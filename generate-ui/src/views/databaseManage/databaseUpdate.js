@@ -1,3 +1,6 @@
+import { resgetUpdateDataTable } from "@/api";
+import { IS_OK } from "@/api/path";
+
 export const databaseUpdate = {
   data () {
     return {
@@ -5,9 +8,18 @@ export const databaseUpdate = {
     }
   },
   methods: {
-    loadingUpdateBtn () {
+    async loadingUpdateBtn () {
       this.loadingUpdate = true;
-      alert()
+      const res = await resgetUpdateDataTable({ projectId: localStorage.getItem("projectId") });
+      if (res.data.code === IS_OK) {
+        setTimeout(() => {
+          this.$message({
+            type: "success",
+            message: "更新成功"
+          });
+          this.loadingUpdate = false
+        }, 500);
+      }
     }
   }
 }

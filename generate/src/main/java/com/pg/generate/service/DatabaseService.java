@@ -19,4 +19,8 @@ public interface DatabaseService {
 
     int delete(String tableId);
 
+    int deleteProject(String projectId);
+
+    List<Database> queryTableAll(String tableSchema);
+
 }

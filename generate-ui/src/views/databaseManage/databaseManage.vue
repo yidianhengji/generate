@@ -205,7 +205,7 @@
 </template>
 
 <script>
-import { resGenGetTable, resGenGenTemplate } from "../../api";
+import { resGenGenTemplate, resApiDatabaseQueryPage } from "../../api";
 import { IS_OK } from "../../api/path";
 import { databaseUpdate } from "./databaseUpdate.js";
 
@@ -608,9 +608,13 @@ export default {
   },
   methods: {
     async getApiResGenGetTable() {
-      const res = await resGenGetTable();
+      const res = await resApiDatabaseQueryPage({
+        pageSize: 10,
+        pageNum: 1,
+        projectId: localStorage.getItem("projectId")
+      });
       if (res.data.code === IS_OK) {
-        this.tableData = res.data.data;
+        this.tableData = res.data.data.list;
       }
     },
     async getApiResGenGenTemplate(tableSchema, tableName, type) {
@@ -623,8 +627,8 @@ export default {
       this.centerDialogVisible = true;
       this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 2);
     },
-    handleClick2(row) {
-      this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 1);
+    handleClick2() {
+      //this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 1);
     },
     handleEditClick(row) {
       this.editDialogVisible = true;

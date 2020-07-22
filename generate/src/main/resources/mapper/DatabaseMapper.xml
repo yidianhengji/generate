@@ -13,8 +13,17 @@
         <result property="modifyTime" column="modify_time" />
     </resultMap>
 
+    <select id="queryTableAll" resultMap="DatabaseMap">
+        SELECT
+          table_schema, table_name, table_collation, table_comment, create_time
+        FROM
+          information_schema. tables
+        WHERE
+          table_schema = #{tableSchema}
+    </select>
+
     <select id="queryPage" resultMap="DatabaseMap">
-        SELECT * FROM tb_database
+        SELECT * FROM tb_database where project_id = #{projectId}
     </select>
 
     <select id="queryAll" resultMap="DatabaseMap">
@@ -63,6 +72,10 @@
 
     <delete id="delete">
         DELETE FROM tb_database WHERE table_id = #{tableId}
+    </delete>
+
+    <delete id="deleteProject">
+        DELETE FROM tb_database WHERE project_id = #{projectId}
     </delete>
 
 </mapper>

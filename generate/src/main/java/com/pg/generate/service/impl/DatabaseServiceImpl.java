@@ -62,4 +62,15 @@ public class DatabaseServiceImpl implements DatabaseService {
     public int delete(String tableId) {
         return this.databaseMapper.delete(tableId);
     }
+
+    @Override
+    public int deleteProject(String projectId) {
+        return this.databaseMapper.deleteProject(projectId);
+    }
+
+    @Override
+    public List<Database> queryTableAll(String tableSchema) {
+        List<Database> list = this.databaseMapper.queryTableAll(tableSchema);
+        return list;
+    }
 }

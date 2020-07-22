@@ -19,4 +19,8 @@ public interface DatabaseMapper {
 
     int delete(String tableId);
 
+    List<Database> queryTableAll(String tableSchema);
+
+    int deleteProject(String projectId);
+
 }
