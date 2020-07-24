@@ -19,6 +19,8 @@ export const databaseUpdate = {
           });
           this.loadingUpdate = false
         }, 500);
+      } else {
+        this.loadingUpdate = false
       }
     }
   }

@@ -627,8 +627,8 @@ export default {
       this.centerDialogVisible = true;
       this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 2);
     },
-    handleClick2() {
-      //this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 1);
+    handleClick2(row) {
+      this.getApiResGenGenTemplate(row.tableSchema, row.tableName, 2);
     },
     handleEditClick(row) {
       this.editDialogVisible = true;

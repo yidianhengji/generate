@@ -1,12 +1,14 @@
 package com.pg.generate.controller;
 
 import com.github.pagehelper.Page;
+import com.pg.generate.entity.Column;
 import com.pg.generate.entity.Database;
 import com.pg.generate.entity.Projects;
 import com.pg.generate.handler.BusinessStatus;
 import com.pg.generate.handler.PageInfo;
 import com.pg.generate.handler.Result;
 import com.pg.generate.handler.ResultPage;
+import com.pg.generate.service.ColumnService;
 import com.pg.generate.service.DatabaseService;
 import com.pg.generate.service.ProjectsService;
 import io.swagger.annotations.Api;
@@ -31,8 +33,8 @@ public class DatabaseController {
     @Resource
     private ProjectsService projectsService;
 
-//    @Resource
-//    private ColumnService columnService;
+    @Resource
+    private ColumnService columnService;
 
     @ApiOperation("分页查询")
     @PostMapping(value = "/queryPage")
@@ -103,13 +105,14 @@ public class DatabaseController {
             // 查询出来的表进行遍历
             for(Database item : queryAll){
                 // 查询出表里面的字段
-//                List<Column> columns = columnService.queryTableColumnAll(item.getTableSchema(), item.getTableName());
-//                if(columns.size()>0){
-//                    // 把表里面的字段进行遍历
-//                    for(Column items : columns) {
-//                        columnService.insert(items);
-//                    }
-//                }
+                List<Column> columns = columnService.queryTableColumnAll(item.getTableSchema(), item.getTableName());
+                if(columns.size()>0){
+                    // 把表里面的字段进行遍历
+                    for(Column items : columns) {
+                        items.setTableId(item.getTableId());
+                        columnService.insert(items);
+                    }
+                }
             }
         }
 

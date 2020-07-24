@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pg.generate.dao.ColumnMapper">
+
+    <resultMap type="com.pg.generate.entity.Column" id="ColumnMap">
+        <result property="columnId" column="column_id" />
+        <result property="tableId" column="table_id" />
+        <result property="columnName" column="column_name" />
+        <result property="columnComment" column="column_comment" />
+        <result property="columnType" column="column_type" />
+        <result property="javaType" column="java_type" />
+        <result property="javaField" column="java_field" />
+        <result property="isPk" column="is_pk" />
+        <result property="isRequired" column="is_required" />
+        <result property="isInsert" column="is_insert" />
+        <result property="isEdit" column="is_edit" />
+        <result property="isList" column="is_list" />
+        <result property="isQuery" column="is_query" />
+        <result property="htmlType" column="html_type" />
+        <result property="createTime" column="create_time" />
+        <result property="modifyTime" column="modify_time" />
+    </resultMap>
+
+    <select id="queryTableColumnAll" resultMap="ColumnMap">
+        SELECT
+            column_name as column_name,
+            data_type as column_type,
+            character_maximum_length,
+            collation_name,
+            column_comment as column_comment,
+            column_key as is_pk
+        FROM
+            information_schema. COLUMNS
+        WHERE
+            table_schema = #{tableSchema}
+        AND table_name = #{tableName}
+    </select>
+
+    <select id="queryPage" resultMap="ColumnMap">
+        SELECT * FROM tb_column
+    </select>
+
+    <select id="queryAll" resultMap="ColumnMap">
+        SELECT * FROM tb_column
+    </select>
+
+    <select id="queryOne" resultMap="ColumnMap">
+        select * from tb_column where column_id = #{columnId}
+    </select>
+
+    <insert id="insert">
+        insert into tb_column( column_id,table_id,column_name,column_comment,column_type,java_type,java_field,is_pk,is_required,is_insert,is_edit,is_list,is_query,html_type,create_time,modify_time )
+        values ( #{columnId},#{tableId},#{columnName},#{columnComment},#{columnType},#{javaType},#{javaField},#{isPk},#{isRequired},#{isInsert},#{isEdit},#{isList},#{isQuery},#{htmlType},#{createTime},#{modifyTime} )
+    </insert>
+
+    <update id="update">
+        update tb_column
+        <set>
+            <if test="columnId != null and columnId != ''">
+                column_id = #{columnId},
+            </if>
+            <if test="tableId != null and tableId != ''">
+                table_id = #{tableId},
+            </if>
+            <if test="columnName != null and columnName != ''">
+                column_name = #{columnName},
+            </if>
+            <if test="columnComment != null and columnComment != ''">
+                column_comment = #{columnComment},
+            </if>
+            <if test="columnType != null and columnType != ''">
+                column_type = #{columnType},
+            </if>
+            <if test="javaType != null and javaType != ''">
+                java_type = #{javaType},
+            </if>
+            <if test="javaField != null and javaField != ''">
+                java_field = #{javaField},
+            </if>
+            <if test="isPk != null and isPk != ''">
+                is_pk = #{isPk},
+            </if>
+            <if test="isRequired != null and isRequired != ''">
+                is_required = #{isRequired},
+            </if>
+            <if test="isInsert != null and isInsert != ''">
+                is_insert = #{isInsert},
+            </if>
+            <if test="isEdit != null and isEdit != ''">
+                is_edit = #{isEdit},
+            </if>
+            <if test="isList != null and isList != ''">
+                is_list = #{isList},
+            </if>
+            <if test="isQuery != null and isQuery != ''">
+                is_query = #{isQuery},
+            </if>
+            <if test="htmlType != null and htmlType != ''">
+                html_type = #{htmlType},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+        </set>
+        where column_id = #{columnId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tb_column WHERE column_id = #{columnId}
+    </delete>
+
+</mapper>
