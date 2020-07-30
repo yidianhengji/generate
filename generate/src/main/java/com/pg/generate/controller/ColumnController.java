@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Api(tags = "活动模块")
+@Api(tags = "表字段模块")
 @RequestMapping("/api/column")
 @RestController
 public class ColumnController {

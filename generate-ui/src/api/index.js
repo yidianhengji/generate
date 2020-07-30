@@ -26,3 +26,14 @@ export const resApiDatabaseSave = data => request(API_PATH + "database/save", da
 export const resApiDatabaseUpdate = data => request(API_PATH + "database/update", data, "PUT");
 export const resApiDatabaseDelete = data => request(API_PATH + "database/delete", data, "DELETE");
 export const resgetUpdateDataTable = data => request(API_PATH + "database/getUpdateDataTable", data, "GET");
+
+
+/**
+ * 表字段
+ */
+export const resApiColumnQueryPage = data => request(API_PATH + "column/queryPage", data, "POST");
+export const resApiColumnQueryAll = data => request(API_PATH + "column/queryAll", data, "GET");
+export const resApiColumnQueryOne = data => request(API_PATH + "column/queryOne", data, "GET");
+export const resApiColumnSave = data => request(API_PATH + "column/save", data, "POST");
+export const resApiColumnUpdate = data => request(API_PATH + "column/update", data, "PUT");
+export const resApiColumnDelete = data => request(API_PATH + "column/delete", data, "DELETE");

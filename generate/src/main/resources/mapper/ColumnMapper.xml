@@ -37,7 +37,7 @@
     </select>
 
     <select id="queryPage" resultMap="ColumnMap">
-        SELECT * FROM tb_column
+        SELECT * FROM tb_column where table_id = #{tableId} ORDER BY create_time
     </select>
 
     <select id="queryAll" resultMap="ColumnMap">
